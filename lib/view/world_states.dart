@@ -36,103 +36,106 @@ class _WorldStatesState extends State<WorldStates>
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-          child: Padding(
-        padding: const EdgeInsets.all(15.0),
-        child: Column(
-          children: [
-            SizedBox(
-              height: MediaQuery.of(context).size.height * .01,
-            ),
-            FutureBuilder(
-                future: statesServices.fetchWorldStates(),
-                builder: (context, AsyncSnapshot<WorldStatesApi> snapshot) {
-                  if (!snapshot.hasData) {
-                    return const Expanded(
+        child: Padding(
+          padding: const EdgeInsets.all(15.0),
+          child: Column(
+            // crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              FutureBuilder(
+                  future: statesServices.fetchWorldStates(),
+                  builder: (context, AsyncSnapshot<WorldStatesApi> snapshot) {
+                    if (!snapshot.hasData) {
+                      print(snapshot.connectionState.toString());
+                      return const Expanded(
                         child: SpinKitFadingCircle(
-                      color: Colors.white,
-                      size: 50,
-                    ));
-                  } else {
-                    return Column(
-                      children: [
-                        PieChart(
-                          dataMap: {
-                            'Total': snapshot.data!.cases!.toDouble(),
-                            'Recovered': snapshot.data!.recovered!.toDouble(),
-                            'Death': snapshot.data!.deaths!.toDouble(),
-                          },
-                          chartValuesOptions: const ChartValuesOptions(
-                            showChartValuesInPercentage: true,
-                          ),
-                          chartRadius: MediaQuery.of(context).size.width / 3.2,
-                          colorList: colorList,
-                          legendOptions: const LegendOptions(
-                              legendPosition: LegendPosition.left),
-                          chartType: ChartType.ring,
-                          animationDuration: const Duration(milliseconds: 1200),
+                          color: Colors.white,
+                          size: 50,
                         ),
-                        Padding(
-                          padding: EdgeInsets.symmetric(
-                              vertical:
-                                  MediaQuery.of(context).size.height * .06),
-                          child: Card(
-                            child: Column(
-                              children: [
-                                ReusableRow(
-                                  title: 'Total',
-                                  value: snapshot.data!.cases!.toString(),
-                                ),
-                                ReusableRow(
-                                  title: 'Recovered',
-                                  value: snapshot.data!.recovered!.toString(),
-                                ),
-                                ReusableRow(
-                                  title: 'Deaths',
-                                  value: snapshot.data!.deaths!.toString(),
-                                ),
-                                ReusableRow(
-                                  title: 'Active',
-                                  value: snapshot.data!.active!.toString(),
-                                ),
-                                ReusableRow(
-                                  title: 'Critical',
-                                  value: snapshot.data!.critical!.toString(),
-                                ),
-                                ReusableRow(
-                                  title: 'Affected Countries',
-                                  value: snapshot.data!.affectedCountries!
-                                      .toString(),
-                                ),
-                              ],
+                      );
+                    } else {
+                      return Column(
+                        children: [
+                          PieChart(
+                            dataMap: {
+                              'Total': snapshot.data!.cases!.toDouble(),
+                              'Recovered': snapshot.data!.recovered!.toDouble(),
+                              'Death': snapshot.data!.deaths!.toDouble(),
+                            },
+                            chartValuesOptions: const ChartValuesOptions(
+                              showChartValuesInPercentage: true,
                             ),
+                            chartRadius:
+                                MediaQuery.of(context).size.width / 3.2,
+                            colorList: colorList,
+                            legendOptions: const LegendOptions(
+                                legendPosition: LegendPosition.left),
+                            chartType: ChartType.ring,
+                            animationDuration:
+                                const Duration(milliseconds: 1200),
                           ),
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const CountriesList(),
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                                vertical:
+                                    MediaQuery.of(context).size.height * .06),
+                            child: Card(
+                              child: Column(
+                                children: [
+                                  ReusableRow(
+                                    title: 'Total',
+                                    value: snapshot.data!.cases!.toString(),
+                                  ),
+                                  ReusableRow(
+                                    title: 'Recovered',
+                                    value: snapshot.data!.recovered!.toString(),
+                                  ),
+                                  ReusableRow(
+                                    title: 'Deaths',
+                                    value: snapshot.data!.deaths!.toString(),
+                                  ),
+                                  ReusableRow(
+                                    title: 'Active',
+                                    value: snapshot.data!.active!.toString(),
+                                  ),
+                                  ReusableRow(
+                                    title: 'Critical',
+                                    value: snapshot.data!.critical!.toString(),
+                                  ),
+                                  ReusableRow(
+                                    title: 'Affected Countries',
+                                    value: snapshot.data!.affectedCountries!
+                                        .toString(),
+                                  ),
+                                ],
                               ),
-                            );
-                          },
-                          child: Container(
-                            height: 50,
-                            decoration: BoxDecoration(
-                                color: const Color(0xff1aa260),
-                                borderRadius: BorderRadius.circular(15)),
-                            child: const Center(
-                              child: Text('Track Countries'),
                             ),
                           ),
-                        )
-                      ],
-                    );
-                  }
-                }),
-          ],
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const CountriesList(),
+                                ),
+                              );
+                            },
+                            child: Container(
+                              height: 50,
+                              decoration: BoxDecoration(
+                                  color: const Color(0xff1aa260),
+                                  borderRadius: BorderRadius.circular(15)),
+                              child: const Center(
+                                child: Text('Track Countries'),
+                              ),
+                            ),
+                          )
+                        ],
+                      );
+                    }
+                  }),
+            ],
+          ),
         ),
-      )),
+      ),
     );
   }
 }

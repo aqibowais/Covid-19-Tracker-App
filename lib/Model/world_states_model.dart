@@ -11,7 +11,7 @@ class WorldStatesApi {
   int? casesPerOneMillion;
   double? deathsPerOneMillion;
   int? tests;
-  int? testsPerOneMillion;
+  // int? testsPerOneMillion;
   int? population;
   int? oneCasePerPeople;
   int? oneDeathPerPeople;
@@ -34,7 +34,7 @@ class WorldStatesApi {
       this.casesPerOneMillion,
       this.deathsPerOneMillion,
       this.tests,
-      this.testsPerOneMillion,
+      // this.testsPerOneMillion,
       this.population,
       this.oneCasePerPeople,
       this.oneDeathPerPeople,
@@ -57,7 +57,7 @@ class WorldStatesApi {
     casesPerOneMillion = json['casesPerOneMillion'];
     deathsPerOneMillion = json['deathsPerOneMillion'];
     tests = json['tests'];
-    testsPerOneMillion = json['testsPerOneMillion'];
+    //  = json['testsPerOneMillion']testsPerOneMillion;
     population = json['population'];
     oneCasePerPeople = json['oneCasePerPeople'];
     oneDeathPerPeople = json['oneDeathPerPeople'];
@@ -82,7 +82,7 @@ class WorldStatesApi {
     data['casesPerOneMillion'] = casesPerOneMillion;
     data['deathsPerOneMillion'] = deathsPerOneMillion;
     data['tests'] = tests;
-    data['testsPerOneMillion'] = testsPerOneMillion;
+    // data['testsPerOneMillion'] = testsPerOneMillion;
     data['population'] = population;
     data['oneCasePerPeople'] = oneCasePerPeople;
     data['oneDeathPerPeople'] = oneDeathPerPeople;

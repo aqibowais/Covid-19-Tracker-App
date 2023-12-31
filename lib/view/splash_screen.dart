@@ -42,42 +42,46 @@ class _SplashScreenState extends State<SplashScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-          child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          AnimatedBuilder(
-            animation: _controller,
-            builder: (
-              BuildContext context,
-              Widget? child,
-            ) {
-              return Transform.rotate(
-                angle: _controller.value * 2.0 * math.pi,
-                child: child,
-              );
-            },
+          child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            AnimatedBuilder(
+              animation: _controller,
+              builder: (
+                BuildContext context,
+                Widget? child,
+              ) {
+                return Transform.rotate(
+                  angle: _controller.value * 2.0 * math.pi,
+                  child: child,
+                );
+              },
 
-            // width: 200,
-            // height: 200,
-            child: const Center(
-              child: Image(
-                image: AssetImage('assets/virus.png'),
+              // width: 200,
+              // height: 200,
+              child: const Center(
+                child: Image(
+                  image: AssetImage('assets/virus.png'),
+                  // width: 200,
+                  // height: 200,
+                ),
               ),
             ),
-          ),
-          SizedBox(
-            height: MediaQuery.of(context).size.height * .08,
-          ),
-          const Text(
-            "Covid-19\nTracker App",
-            style: TextStyle(
-              fontSize: 25,
-              fontWeight: FontWeight.bold,
+            SizedBox(
+              height: MediaQuery.of(context).size.height * .08,
             ),
-            textAlign: TextAlign.center,
-          )
-        ],
+            const Text(
+              "Covid-19\nTracker App",
+              style: TextStyle(
+                fontSize: 25,
+                fontWeight: FontWeight.bold,
+              ),
+              textAlign: TextAlign.center,
+            )
+          ],
+        ),
       )),
     );
   }
