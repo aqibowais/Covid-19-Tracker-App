@@ -1,16 +1,10 @@
-# covid_19_tracker_app
+COVID-19 Tracker App
+Overview
+This COVID-19 Tracker app is designed to provide real-time information about the global COVID-19 pandemic. It offers a user-friendly interface to access updated statistics, including confirmed cases, recoveries, and fatalities. The app aims to provide accurate data visualization, API integration, and dynamic animations for an engaging user experience.
 
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Features
+Real-time Data: Utilizes live API integration to display the latest COVID-19 statistics worldwide.
+Dynamic Visuals: Engages users with interactive and visually appealing representations of pandemic data.
+User-Friendly Interface: Prioritizes simplicity and ease of use for accessing critical information.
+Animation Integration: Implements dynamic animations for an enhanced user experience.
+Data Accuracy: Ensures the reliability and accuracy of displayed statistics by fetching live data from credible sources.
