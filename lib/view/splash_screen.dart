@@ -4,6 +4,8 @@ import 'package:covid_19_tracker_app/view/world_states.dart';
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
+import 'package:flutter/scheduler.dart';
+
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 

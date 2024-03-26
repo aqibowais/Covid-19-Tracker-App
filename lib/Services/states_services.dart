@@ -1,15 +1,15 @@
 import 'dart:convert';
 
-import 'package:covid_19_tracker_app/Model/world_states_model.dart';
 import 'package:covid_19_tracker_app/Services/Utilities/app_url.dart';
 import 'package:http/http.dart' as http;
 
 class StatesServices {
-  Future<WorldStatesApi> fetchWorldStates() async {
+  // ignore: prefer_typing_uninitialized_variables
+  var data;
+  Future<void> fetchWorldStates() async {
     final response = await http.get(Uri.parse(AppUrl.worldStatesApi));
     if (response.statusCode == 200) {
-      var data = jsonDecode(response.body.toString());
-      return WorldStatesApi.fromJson(data);
+      data = jsonDecode(response.body.toString());
     } else {
       throw Exception('Error');
     }

@@ -1,4 +1,3 @@
-import 'package:covid_19_tracker_app/Model/world_states_model.dart';
 import 'package:covid_19_tracker_app/Services/states_services.dart';
 import 'package:covid_19_tracker_app/components/reusable_row.dart';
 import 'package:covid_19_tracker_app/view/countries_search_screen.dart';
@@ -15,7 +14,6 @@ class WorldStates extends StatefulWidget {
 
 class _WorldStatesState extends State<WorldStates>
     with TickerProviderStateMixin {
-  StatesServices statesServices = StatesServices();
   late final AnimationController _controller =
       AnimationController(duration: const Duration(seconds: 3), vsync: this)
         ..repeat();
@@ -34,6 +32,7 @@ class _WorldStatesState extends State<WorldStates>
 
   @override
   Widget build(BuildContext context) {
+    StatesServices statesServices = StatesServices();
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -43,9 +42,8 @@ class _WorldStatesState extends State<WorldStates>
             children: [
               FutureBuilder(
                   future: statesServices.fetchWorldStates(),
-                  builder: (context, AsyncSnapshot<WorldStatesApi> snapshot) {
-                    if (!snapshot.hasData) {
-                      print(snapshot.connectionState.toString());
+                  builder: (BuildContext context, AsyncSnapshot snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
                       return const Expanded(
                         child: SpinKitFadingCircle(
                           color: Colors.white,
@@ -53,13 +51,18 @@ class _WorldStatesState extends State<WorldStates>
                         ),
                       );
                     } else {
+                      print(statesServices.data.toString());
+
                       return Column(
                         children: [
                           PieChart(
                             dataMap: {
-                              'Total': snapshot.data!.cases!.toDouble(),
-                              'Recovered': snapshot.data!.recovered!.toDouble(),
-                              'Death': snapshot.data!.deaths!.toDouble(),
+                              'Total': double.parse(
+                                  statesServices.data["cases"].toString()),
+                              'Recovered': double.parse(
+                                  statesServices.data["recovered"].toString()),
+                              'Death': double.parse(
+                                  statesServices.data["deaths"].toString()),
                             },
                             chartValuesOptions: const ChartValuesOptions(
                               showChartValuesInPercentage: true,
@@ -82,27 +85,33 @@ class _WorldStatesState extends State<WorldStates>
                                 children: [
                                   ReusableRow(
                                     title: 'Total',
-                                    value: snapshot.data!.cases!.toString(),
+                                    value:
+                                        statesServices.data["cases"].toString(),
                                   ),
                                   ReusableRow(
                                     title: 'Recovered',
-                                    value: snapshot.data!.recovered!.toString(),
+                                    value: statesServices.data["recovered"]
+                                        .toString(),
                                   ),
                                   ReusableRow(
                                     title: 'Deaths',
-                                    value: snapshot.data!.deaths!.toString(),
+                                    value: statesServices.data["deaths"]
+                                        .toString(),
                                   ),
                                   ReusableRow(
                                     title: 'Active',
-                                    value: snapshot.data!.active!.toString(),
+                                    value: statesServices.data["active"]
+                                        .toString(),
                                   ),
                                   ReusableRow(
                                     title: 'Critical',
-                                    value: snapshot.data!.critical!.toString(),
+                                    value: statesServices.data["critical"]
+                                        .toString(),
                                   ),
                                   ReusableRow(
                                     title: 'Affected Countries',
-                                    value: snapshot.data!.affectedCountries!
+                                    value: statesServices
+                                        .data["affectedCountries"]
                                         .toString(),
                                   ),
                                 ],
