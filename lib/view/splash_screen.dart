@@ -18,12 +18,6 @@ class _SplashScreenState extends State<SplashScreen>
   late final AnimationController _controller =
       AnimationController(duration: const Duration(seconds: 3), vsync: this)
         ..repeat();
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    super.dispose();
-    _controller.dispose();
-  }
 
   @override
   void initState() {
@@ -38,6 +32,13 @@ class _SplashScreenState extends State<SplashScreen>
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    _controller.dispose();
+    super.dispose();
   }
 
   @override
